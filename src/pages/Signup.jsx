@@ -14,7 +14,6 @@ const Signup = () => {
     console.log(credential);
   }, [credential]);
 
-
   const signUpUser = async (e) => {
     e.preventDefault();
     if (
@@ -36,6 +35,7 @@ const Signup = () => {
       await updateProfile(user, {
         displayName: credential.name,
       });
+      localStorage.setItem("user", user);
       setCredential({
         name: "",
         email: "",

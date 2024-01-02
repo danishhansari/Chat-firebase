@@ -33,7 +33,7 @@ const Input = () => {
           onChange={(e) => setInput(e.target.value)}
           type="text"
           placeholder="Write your message!"
-          className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-4  bg-gray-200 rounded-md py-3"
+          className="w-full focus:outline-none focus:placeholder-gray-400 dark:text-gray-100 text-gray-600 placeholder-gray-600 pl-4  bg-gray-200 dark:bg-gray-800 rounded-md py-3"
         />
         <div className="absolute right-0 items-center inset-y-0 sm:flex">
           <button

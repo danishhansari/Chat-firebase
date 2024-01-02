@@ -58,28 +58,29 @@ const Home = () => {
 
   const signOutUser = () => {
     signOut(auth);
+    localStorage.clear("user");
     navigate("/signup");
   };
   return (
     <>
-      <div className="flex-1 p:2 sm:p-6 justify-between flex px-3 flex-col h-screen">
+      <div className="flex-1 p:2 sm:p-6 justify-between flex px-3 flex-col h-screen bg-gray-50 dark:bg-gray-900">
         <div className="flex sm:items-center justify-between border-b-2 border-gray-200">
           <div className="relative flex justify-between w-full items-center space-x-4">
             <div className="flex flex-col leading-tight">
               <div className="text-xl md:text-2xl flex items-center py-4">
-                <span className="text-gray-700 mr-3">
+                <span className="text-gray-700 mr-3 dark:text-white">
                   Chat With Your Love Ones
                 </span>
               </div>
             </div>
-            <button onClick={signOutUser} className="py-4">
+            <button onClick={signOutUser} className="py-4 dark:text-white">
               <PiSignOut size={25} />
             </button>
           </div>
         </div>
         <div
           id="messages"
-          className="flex flex-col min-h-[80vh] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+          className="flex flex-col min-h-[10vh] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
         >
           {chats.map((chat) => {
             return (
@@ -87,7 +88,9 @@ const Home = () => {
                 <div className="chat-message" key={chat.id}>
                   <div className="flex items-end justify-end">
                     <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                      <span>{chat.username}</span>
+                      <span className="dark:text-white text-gray-800">
+                        {chat.username}
+                      </span>
                       <div className="relative flex">
                         <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
                           {chat.input}
@@ -99,7 +102,9 @@ const Home = () => {
                           />
                         </button>
                       </div>
-                      <span>{formatDate(chat.timestamp)}</span>
+                      <span className="dark:text-white text-gray-800">
+                        {formatDate(chat.timestamp)}
+                      </span>
                     </div>
                   </div>
                 </div>
