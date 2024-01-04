@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Input from "../component/Input";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { PiSignOut } from "react-icons/pi";
 import {
   collection,
@@ -12,6 +11,12 @@ import {
 import { auth, db } from "../../firebaseConfig";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import ChatMessage from "../component/Chatmessage";
+
+export const formatDate = (timestamp) => {
+  const time = new Date(timestamp);
+  return time.toLocaleTimeString();
+};
 const Home = () => {
   const navigate = useNavigate();
   const user = auth.currentUser;
@@ -52,16 +57,13 @@ const Home = () => {
     }
   };
 
-  const formatDate = (timestamp) => {
-    const time = new Date(timestamp);
-    return time.toLocaleTimeString();
-  };
-
   const signOutUser = () => {
     signOut(auth);
     localStorage.clear("user");
     navigate("/signup");
   };
+  const sortedChats = chats.slice().sort((a, b) => a.timestamp - b.timestamp);
+
   return (
     <>
       <div className="flex-1 p:2 sm:p-6 justify-between flex px-3 flex-col h-screen bg-gray-50 dark:bg-gray-900">
@@ -83,66 +85,14 @@ const Home = () => {
           id="messages"
           className="flex flex-col min-h-[10vh] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
         >
-          {chats.map((chat) => {
-            console.log(user.uid === chat.userId);
-            if (user.uid === chat.userId) {
-              return (
-                <>
-                  <div className="chat-message" key={chat.id}>
-                    <div className="flex items-end justify-end">
-                      <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                        <span className="dark:text-white text-gray-800">
-                          {chat.username}
-                        </span>
-                        <div className="relative flex">
-                          <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
-                            {chat.input}
-                          </span>
-                          <button onClick={() => deleteChat(chat.id)}>
-                            <RiDeleteBin5Line
-                              className="text-red-500 self-end justify-self-end"
-                              size={15}
-                            />
-                          </button>
-                        </div>
-                        <span className="dark:text-white text-gray-800">
-                          {formatDate(chat.timestamp)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            } else {
-              return (
-                <>
-                  <div className="chat-message" key={chat.id}>
-                    <div className="flex items-end justify-start">
-                      <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                        <span className="dark:text-white text-gray-800">
-                          {chat.username}
-                        </span>
-                        <div className="relative flex">
-                          <button onClick={() => deleteChat(chat.id)}>
-                            <RiDeleteBin5Line
-                              className="text-red-500 self-end justify-self-end"
-                              size={15}
-                            />
-                          </button>
-                          <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-gray-600 text-white ">
-                            {chat.input}
-                          </span>
-                        </div>
-                        <span className="dark:text-white text-gray-800">
-                          {formatDate(chat.timestamp)}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            }
-          })}
+          {sortedChats.map((chat) => (
+            <ChatMessage
+              key={chat.id}
+              chat={chat}
+              user={user}
+              deleteChat={deleteChat}
+            />
+          ))}
         </div>
         <Input />
       </div>
