@@ -5,7 +5,7 @@ const ChatMessage = ({ chat, user, deleteChat }) => {
 
   return (
     <div
-      className={`chat-message ${
+      className={`chat-message max-w-[100px] ${
         isCurrentUser ? "justify-end" : "justify-start"
       }`}
       key={chat.id}
@@ -20,7 +20,7 @@ const ChatMessage = ({ chat, user, deleteChat }) => {
           <div className="relative flex">
             {isCurrentUser ? (
               <>
-                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white">
+                <span className="px-2 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white">
                   {chat.input}
                 </span>
                 <button onClick={() => deleteChat(chat.id)}>
@@ -38,7 +38,7 @@ const ChatMessage = ({ chat, user, deleteChat }) => {
                     size={15}
                   />
                 </button>
-                <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-gray-600 text-white">
+                <span className="px-2 py-2 rounded-lg inline-block rounded-br-none bg-gray-600 text-white">
                   {chat.input}
                 </span>
               </>
