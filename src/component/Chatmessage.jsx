@@ -32,12 +32,6 @@ const ChatMessage = ({ chat, user, deleteChat }) => {
               </>
             ) : (
               <>
-                <button onClick={() => deleteChat(chat.id)}>
-                  <RiDeleteBin5Line
-                    className="text-red-500 self-end justify-self-end"
-                    size={15}
-                  />
-                </button>
                 <span className="px-1 py-2 rounded-lg inline-block rounded-br-none bg-gray-600 text-white">
                   {chat.input}
                 </span>
