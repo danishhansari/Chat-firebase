@@ -5,7 +5,7 @@ const ChatMessage = ({ chat, user, deleteChat }) => {
 
   return (
     <div
-      className={`chat-message w-full max-w-[250px] ${
+      className={`chat-message w-full max-w-[500px] ${
         isCurrentUser ? "justify-end" : "justify-start"
       }`}
       key={chat.id}
