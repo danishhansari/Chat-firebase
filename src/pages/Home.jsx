@@ -66,7 +66,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex-1 p:2 sm:p-6 justify-between flex px-3 flex-col h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex-1 p:2 sm:p-6 justify-between flex px-2 flex-col h-screen bg-gray-50 dark:bg-gray-900">
         <div className="flex sm:items-center justify-between border-b-2 border-gray-200">
           <div className="relative flex justify-between w-full items-center space-x-4">
             <div className="flex flex-col leading-tight">
@@ -83,7 +83,7 @@ const Home = () => {
         </div>
         <div
           id="messages"
-          className="flex flex-col min-h-[10vh] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
+          className="flex flex-col min-h-[10vh] space-y-2 p-2 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
         >
           {sortedChats.map((chat) => (
             <ChatMessage
